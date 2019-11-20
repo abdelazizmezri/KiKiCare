@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">KiKiCare</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="facebook_app_id">775458946230477</string>
+    <string name="fb_login_protocol_scheme">fb775458946230477</string>
+
+    <string-array name="language">
+        <item>Frençais</item>
+        <item>Anglais</item>
+        <item>Arabe</item>
+    </string-array>
+
+</resources>
