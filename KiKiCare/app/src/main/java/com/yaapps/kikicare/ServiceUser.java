@@ -87,4 +87,11 @@ public class ServiceUser {
         }
         return user;
     }
+
+    private static int i = 0;
+    public int isFound(String email){
+
+        Log.println(Log.INFO, "response", i+"");
+        return i;
+    }
 }

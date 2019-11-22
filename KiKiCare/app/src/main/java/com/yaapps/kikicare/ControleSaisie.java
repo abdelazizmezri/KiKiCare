@@ -9,22 +9,22 @@ public class ControleSaisie {
 
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-    private static final String pwd=  "^[A-Za-z0-9]+$";
+    private static final String pwd=  "^[A-Za-z0-9]{6,}$";
     private static Pattern pattern1 = Pattern.compile(pwd);
 
     public static boolean isString(String text) {
         return text.matches("^[a-zA-Z]+$");
     }
 
-    public static boolean isNull(String text){
-        return text.equals(""); //null
-//n'est pas vide
+    public static boolean isUsername(String text) {
+        return text.matches("^[A-Za-z]+$+");
+
     }
 
-    public static boolean isUsername(String text) {
+    /*public static boolean isUsername(String text) {
         return text.matches("^[A-Za-z0-9]+$+");
 
-    }
+    }*/
 
     public static boolean DateNullCS(String date){
         return date.equals("");

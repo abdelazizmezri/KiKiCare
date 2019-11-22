@@ -105,6 +105,7 @@
                         <EditText
                             android:id="@+id/editTextVerifPassword"
                             style="@style/registerEditText"
+                            android:enabled="false"
                             android:hint="Reenter your password"
                             android:maxLines="1"
                             android:inputType="textPassword"/>
