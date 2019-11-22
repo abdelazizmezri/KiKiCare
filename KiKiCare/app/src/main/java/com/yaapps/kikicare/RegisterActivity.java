@@ -245,7 +245,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String lastName = textInputLasName.getEditText().getText().toString();
                 String password = textInputPassword.getEditText().getText().toString();
                 //Register
-                User user = new User(email, firstName, lastName, password, "", "EMAIL");
+                User user = new User(email, firstName, lastName, password, "null", "EMAIL");
                 register(user, cirRegisterButton, v);
             }else{
                 cirRegisterButton.revertAnimation();
