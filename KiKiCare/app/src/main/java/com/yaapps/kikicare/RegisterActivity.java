@@ -2,7 +2,10 @@ package com.yaapps.kikicare;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Debug;
@@ -238,25 +241,32 @@ public class RegisterActivity extends AppCompatActivity {
         cirRegisterButton = findViewById(R.id.cirRegisterButton);
         cirRegisterButton.setOnClickListener(v -> {
             cirRegisterButton.startAnimation();
-            if(textInputFirstNameControle && textInputLasNameControle && textInputEmailControle && textInputPasswordControle && textInputVerifPasswordControle) {
-                cirRegisterButton.setError(null);
-                String email = textInputEmail.getEditText().getText().toString();
-                String firstName = textInputFirstName.getEditText().getText().toString();
-                String lastName = textInputLasName.getEditText().getText().toString();
-                String password = textInputPassword.getEditText().getText().toString();
-                //Register
-                User user = new User(email, firstName, lastName, password, "null", "EMAIL");
-                register(user, cirRegisterButton, v);
-            }else{
+            if(isConnected()) {
+                if (textInputFirstNameControle && textInputLasNameControle && textInputEmailControle && textInputPasswordControle && textInputVerifPasswordControle) {
+                    cirRegisterButton.setError(null);
+                    String email = textInputEmail.getEditText().getText().toString();
+                    String firstName = textInputFirstName.getEditText().getText().toString();
+                    String lastName = textInputLasName.getEditText().getText().toString();
+                    String password = textInputPassword.getEditText().getText().toString();
+                    //Register
+                    User user = new User(email, firstName, lastName, password, "null", "EMAIL");
+                    register(user, cirRegisterButton, v);
+                } else {
+                    cirRegisterButton.revertAnimation();
+                    cirRegisterButton.setError("");
+                    Toast.makeText(RegisterActivity.this, "Formular uncomplet", Toast.LENGTH_LONG).show();
+                }
+            }
+            else{
                 cirRegisterButton.revertAnimation();
                 cirRegisterButton.setError("");
-                Toast.makeText(RegisterActivity.this, "Formular uncomplet", Toast.LENGTH_LONG).show();
+                Toast.makeText(RegisterActivity.this, "pas de connection", Toast.LENGTH_LONG).show();
             }
         });
 
     }
 
-    private void onLoginClick(View view){
+    public void onLoginClick(View view){
         startActivity(new Intent(this,LoginActivity.class));
         overridePendingTransition(R.anim.slide_in_left,android.R.anim.slide_out_right);
     }
@@ -321,5 +331,10 @@ public class RegisterActivity extends AppCompatActivity {
         queue.add(postRequest);
     }
 
-
+    private boolean isConnected() {
+        ConnectivityManager cm = (ConnectivityManager) RegisterActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    }
 }
