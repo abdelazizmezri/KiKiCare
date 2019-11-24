@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yaapps.kikicare.LoginActivity"
+    android:background="@color/gradyellow"
+    android:focusableInTouchMode="true"
+    android:gravity="center"
+    android:layout_gravity="center">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:paddingTop="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="131dp"
+                    app:srcCompat="@mipmap/ic_kiki_foreground" />
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:layout_weight="6"
+                android:gravity="center"
+                android:weightSum="12"
+                android:orientation="vertical">
+
+
+
+                <TextView
+                    style="@style/viewParent.headerText.WhiteMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Welcome "
+                    android:textAlignment="center"
+                    android:textSize="40sp" />
+
+
+
+                <TextView
+                    android:id="@+id/fname"
+                    android:layout_marginTop="10dp"
+                    style="@style/viewParent.headerText.WhiteMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textAlignment="center"
+                    android:textSize="40sp" />
+                <TextView
+
+                    style="@style/viewParent.headerText.WhiteMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="80dp"
+                    android:text="Just a fiew more steps to finish"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+                <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+                    android:layout_marginTop="80dp"
+                    android:id="@+id/cirLoginButton"
+                    style="@style/loginButton"
+                    app:spinning_bar_width="4dp"
+                    app:spinning_bar_color="#FFF"
+                    android:text="Continue"
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="openFrag"
+                    app:spinning_bar_padding="6dp"
+                    app:initialCornerAngle="27dp"/>
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+    <ImageView
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:onClick="onLoginClick"
+        android:adjustViewBounds="false"/>
+</RelativeLayout>

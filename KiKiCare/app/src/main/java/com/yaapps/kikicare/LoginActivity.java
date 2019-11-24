@@ -37,6 +37,8 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.yaapps.kikicare.UI.HomeActivity;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
@@ -169,7 +171,7 @@ public class LoginActivity extends AppCompatActivity {
                                             );
                                             if(user.getPassword().contentEquals(textInputPassword.getEditText().getText())){
                                                 bt_login.revertAnimation();
-                                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                             }else{
                                                 bt_login.revertAnimation();
                                                 bt_login.setError("");
@@ -306,7 +308,7 @@ public class LoginActivity extends AppCompatActivity {
                                             public void onResponse(String response) {
                                                 // response
                                                 Toast.makeText(LoginActivity.this, txtemail + " est ajouté avec succés", Toast.LENGTH_LONG).show();
-                                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                             }
                                         },
                                         new Response.ErrorListener()
@@ -332,7 +334,7 @@ public class LoginActivity extends AppCompatActivity {
                                             public void onResponse(String response) {
                                                 // response
                                                 Toast.makeText(LoginActivity.this, txtemail + " est ajouté avec succés", Toast.LENGTH_LONG).show();
-                                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                             }
                                         },
                                         new Response.ErrorListener()
@@ -345,7 +347,7 @@ public class LoginActivity extends AppCompatActivity {
                                         }
                                 );
                                 queue.add(postRequest);
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                             }
                         }
                     },
@@ -423,7 +425,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     public void onResponse(String response) {
                                                         // response
                                                         Toast.makeText(LoginActivity.this, txtemail + " est ajouté avec succés", Toast.LENGTH_LONG).show();
-                                                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                                     }
                                                 },
                                                 new Response.ErrorListener()
@@ -449,7 +451,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     public void onResponse(String response) {
                                                         // response
                                                         Toast.makeText(LoginActivity.this, txtemail + " est ajouté avec succés", Toast.LENGTH_LONG).show();
-                                                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                                     }
                                                 },
                                                 new Response.ErrorListener()
@@ -462,7 +464,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 }
                                         );
                                         queue.add(postRequest);
-                                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                     }
                                 }
                             },

@@ -44,8 +44,8 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
 
     //ROOM
-    implementation 'androidx.room:room-runtime:2.2.1'
-    annotationProcessor 'androidx.room:room-compiler:2.2.1'
+    implementation 'androidx.room:room-runtime:2.2.2'
+    annotationProcessor 'androidx.room:room-compiler:2.2.2'
 
     //Material
     implementation 'com.google.android.material:material:1.0.0'
@@ -56,4 +56,15 @@ dependencies {
 
     //animated button for login
     implementation 'br.com.simplepass:loading-button-android:1.14.0'
+
+    //displaying Gradient in layout
+    implementation 'net.colindodd:gradientlayout:1.2'
+
+    //Drawer
+    implementation "com.mikepenz:materialdrawer:6.1.2"
+
+    //RecyclerView ad CardView
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 }

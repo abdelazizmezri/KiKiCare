@@ -4,6 +4,26 @@
     <string name="login_password_hint">Password</string>
     <string name="facebook_app_id">775458946230477</string>
     <string name="fb_login_protocol_scheme">fb775458946230477</string>
+//
+    <string name="animal_name_hint"> Animal Name</string>
+    <string name="animal_type_hint">what is your animal?(Cat,Dog ..)</string>
+    <string name="animal_race_hint">what is your animal race ?</string>
+    <string name="animal_age_hint">Birth Date</string>
+
+    <string-array name="sexe">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="size">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Big</item>
+    </string-array>
+    <string-array name="type">
+        <item>Cat</item>
+        <item>Dog</item>
+        <item>Other</item>
+    </string-array>
 
     <string-array name="language">
         <item>English</item>

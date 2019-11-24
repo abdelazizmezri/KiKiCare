@@ -63,4 +63,26 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="spinnerHintText" parent="parent">
+        <item name="android:textSize">@dimen/newsMoreTextSize</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:paddingLeft">5dp</item>
+    </style>
+
+    <style name="MyActionBar" parent="Theme.AppCompat.NoActionBar">
+        <item name="actionMenuTextColor">@android:color/white</item>
+    </style>
+
+    //
+
+    <style name="viewParent.headerText.WhiteMode">
+        <item name="android:textColor">@color/whiteTextColor</item>
+    </style>
+
+    <style name="saveButton" parent="viewParent">
+        <item name="android:background">@drawable/button_background_green</item>
+        <item name="android:textColor">@color/whiteTextColor</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
