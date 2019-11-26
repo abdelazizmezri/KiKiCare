@@ -30,7 +30,7 @@ public class ServiceUser {
     }
 
     public void addUser(User user){
-        String url = "http://10.0.2.2:1225/AddUser?first_name=" + user.getFirstName()
+        String url = "http://192.168.137.1:1225/AddUser?first_name=" + user.getFirstName()
                 + "&last_name=" + user.getLastName()
                 + "&email=" + user.getEmail()
                 + "&password=" + user.getPassword()
@@ -61,7 +61,7 @@ public class ServiceUser {
     public User getUser(String email){
 
         User user = null;
-        final String url = "http://10.0.2.2:1225/getUser?email=" + email;
+        final String url = "http://192.168.137.1:1225/getUser?email=" + email;
 
         HttpHandler sh = new HttpHandler();
 

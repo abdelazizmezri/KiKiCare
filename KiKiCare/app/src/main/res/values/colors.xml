@@ -50,4 +50,9 @@
     <color name="transparent">#00000000</color>
     <color name="gradyellow">#FFEB3B</color>
 
+    //
+    <color name="df_transparent_black_background">#80000000</color>
+    <color name="whiteCardColor">#fff</color>
+    <color name="blackTextColor">#000</color>
+
 </resources>

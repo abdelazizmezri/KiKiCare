@@ -150,7 +150,7 @@ public class LoginActivity extends AppCompatActivity {
                 bt_login.startAnimation();
                 if(textInputEmailControle && textInputPasswordControle){
                     queue = Volley.newRequestQueue(LoginActivity.this);
-                    final String url = "http://10.0.2.2:1225/getUser?email=" + textInputEmail.getEditText().getText();
+                    final String url = "http://192.168.137.1:1225/getUser?email=" + textInputEmail.getEditText().getText();
                     StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                             new Response.Listener<String>()
                             {
@@ -227,9 +227,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(isConnected())
                     signInGoogle();
-                else{
-                    Toast.makeText(LoginActivity.this, "pas de connection", Toast.LENGTH_LONG).show();
-                }
             }
         });
 
@@ -260,9 +257,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
                 }
-                else{
-                    Toast.makeText(LoginActivity.this, "pas de connection", Toast.LENGTH_LONG).show();
-                }
             }
         });
     }
@@ -288,7 +282,7 @@ public class LoginActivity extends AppCompatActivity {
             txtlastname =  account.getFamilyName();
             imageurl = account.getPhotoUrl().toString();
             queue = Volley.newRequestQueue(LoginActivity.this);
-            final String url = "http://10.0.2.2:1225/getUser?email=" + txtemail;
+            final String url = "http://192.168.137.1:1225/getUser?email=" + txtemail;
             StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>()
                     {
@@ -296,7 +290,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void onResponse(String response) {
                             // response
                             if(response.isEmpty()){
-                                String url = "http://10.0.2.2:1225/AddUser?first_name=" + txtname
+                                String url = "http://192.168.137.1:1225/AddUser?first_name=" + txtname
                                         + "&last_name=" + txtlastname
                                         + "&email=" + txtemail
                                         + "&url_image=" + imageurl
@@ -322,7 +316,7 @@ public class LoginActivity extends AppCompatActivity {
                                 );
                                 queue.add(postRequest);
                             }else{
-                                String url = "http://10.0.2.2:1225/UpdateUser?first_name=" + txtname
+                                String url = "http://192.168.137.1:1225/UpdateUser?first_name=" + txtname
                                         + "&last_name=" + txtlastname
                                         + "&email=" + txtemail
                                         + "&url_image=" + imageurl
@@ -405,7 +399,7 @@ public class LoginActivity extends AppCompatActivity {
                     //Glide.with(LoginActivity.this).load(image_url).into(circleImageView);
 
                     queue = Volley.newRequestQueue(LoginActivity.this);
-                    final String url = "http://10.0.2.2:1225/getUser?email=" + txtemail;
+                    final String url = "http://192.168.137.1:1225/getUser?email=" + txtemail;
                     StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                             new Response.Listener<String>()
                             {
@@ -413,7 +407,7 @@ public class LoginActivity extends AppCompatActivity {
                                 public void onResponse(String response) {
                                     // response
                                     if(response.isEmpty()){
-                                        String url = "http://10.0.2.2:1225/AddUser?first_name=" + txtname
+                                        String url = "http://192.168.137.1:1225/AddUser?first_name=" + txtname
                                                 + "&last_name=" + txtlastname
                                                 + "&email=" + txtemail
                                                 + "&url_image=" + imageurl
@@ -439,7 +433,7 @@ public class LoginActivity extends AppCompatActivity {
                                         );
                                         queue.add(postRequest);
                                     }else{
-                                        String url = "http://10.0.2.2:1225/UpdateUser?first_name=" + txtname
+                                        String url = "http://192.168.137.1:1225/UpdateUser?first_name=" + txtname
                                                 + "&last_name=" + txtlastname
                                                 + "&email=" + txtemail
                                                 + "&url_image=" + imageurl
@@ -520,9 +514,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isConnected() {
-        ConnectivityManager cm = (ConnectivityManager) LoginActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        assert cm != null;
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        return new InternetDialog(this).getInternetStatus();
     }
 }
