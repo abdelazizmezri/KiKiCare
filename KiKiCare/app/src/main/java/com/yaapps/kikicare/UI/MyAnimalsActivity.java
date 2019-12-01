@@ -4,11 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.yaapps.kikicare.R;
 import com.yaapps.kikicare.UI.fragments.AnimalListFragment;
 
@@ -27,4 +24,5 @@ public class MyAnimalsActivity extends AppCompatActivity {
                 .replace(R.id.containerList,fragment,"LIST")
                 .commit();
     }
+
 }

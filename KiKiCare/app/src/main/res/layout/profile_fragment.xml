@@ -48,7 +48,7 @@
 
 
         <TextView
-            android:id="@+id/tv_address"
+            android:id="@+id/tv_sexe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_name"
@@ -60,6 +60,7 @@
             android:textSize="14sp" />
 
         <ImageView
+            android:id="@+id/image_update"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
@@ -95,6 +96,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_birth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
@@ -132,6 +134,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_race"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"

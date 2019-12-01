@@ -9,26 +9,39 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import com.yaapps.kikicare.Entity.Animal;
 import com.yaapps.kikicare.R;
 
 
 public class ProfileFragment extends Fragment {
-    ImageView profileImage;
+    ImageView profileImage,update;
+    TextView tvname,tvrace,tvsexe,tvbirth;
+    private int id;
+    private String type;
     private static final int IMAGE_PICK_CODE=1000;
     private static final int PERMISSION_CODE=1001;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        Bundle bundle = this.getArguments();
         View rootView = inflater.inflate(R.layout.profile_fragment, container, false);
         profileImage=rootView.findViewById(R.id.profilImg);
+        tvname=rootView.findViewById(R.id.tv_name);
+        tvsexe=rootView.findViewById(R.id.tv_sexe);
+        tvrace=rootView.findViewById(R.id.tv_race);
+        tvbirth=rootView.findViewById(R.id.tv_birth);
+        update=rootView.findViewById(R.id.image_update);
+   checkAndFillData();
+
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +66,13 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+update.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
 
+displayFragment(new UpdateAnimalFragment(),bundle.getString("name"),bundle.getString("race"),bundle.getString("birth"),bundle.getInt("id"));
+    }
+});
 
         return rootView;
     }
@@ -114,6 +133,35 @@ public class ProfileFragment extends Fragment {
 //        });
 //        builder.show();
 //    }
+    private void checkAndFillData()
+    {
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            id = bundle.getInt("id",0);
+            tvname.setText(bundle.getString("name"));
+            tvrace.setText(bundle.getString("race"));
+            tvsexe.setText(bundle.getString("sexe"));
+            type=bundle.getString("type");
+            tvbirth.setText(bundle.getString("birth"));
+        }
+    }
+    protected void displayFragment(Fragment fragment, String name,String race,String birth,int id) {
+        FragmentManager ft = getFragmentManager();
+        Fragment myFragment = ft.findFragmentByTag("PROFILE");
+        Bundle bundle = new Bundle();
+        bundle.putInt("id",id);
+        bundle.putString("name",name);
+        bundle.putString("race",race);
+        bundle.putString("birth",birth);
+        fragment.setArguments(bundle);
+        if (myFragment != null && myFragment.isVisible()) {
+            ft.beginTransaction().setCustomAnimations(android.R.animator.fade_in,
+                    android.R.animator.fade_out)
+                    .hide(myFragment)
+                    .replace(R.id.containerList,fragment,"UPDATE")
+                    .commit();
+        }
+    }
 }
 
 

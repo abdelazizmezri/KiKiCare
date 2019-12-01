@@ -260,6 +260,7 @@ public class RegisterActivity extends AppCompatActivity {
             else{
                 cirRegisterButton.revertAnimation();
                 cirRegisterButton.setError("");
+                Toast.makeText(RegisterActivity.this, "pas de connection", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -272,7 +273,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void register(User user, CircularProgressButton cirRegisterButton, View v){
         queue = Volley.newRequestQueue(RegisterActivity.this);
-        final String url = "http://192.168.137.1:1225/getUser?email=" + user.getEmail();
+        final String url = "http://10.0.2.2:1225/getUser?email=" + user.getEmail();
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>()
                 {
@@ -280,7 +281,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         // response
                         if(response.isEmpty()){
-                            String url = "http://192.168.137.1:1225/AddUser?first_name=" + user.getFirstName()
+                            String url = "http://10.0.2.2:1225/AddUser?first_name=" + user.getFirstName()
                                     + "&last_name=" + user.getLastName()
                                     + "&email=" + user.getEmail()
                                     + "&password=" + user.getPassword()
