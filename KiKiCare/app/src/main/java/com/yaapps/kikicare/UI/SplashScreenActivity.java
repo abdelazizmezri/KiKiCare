@@ -2,6 +2,7 @@ package com.yaapps.kikicare.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,9 +10,11 @@ import android.view.View;
 
 import com.yaapps.kikicare.R;
 
-public class SplashScreen extends AppCompatActivity {
+public class SplashScreenActivity extends AppCompatActivity {
 
     ConstraintLayout splash;
+
+
 
     Handler handler = new Handler();
     Runnable show = new Runnable() {
@@ -44,11 +47,17 @@ public class SplashScreen extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
-                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), StartActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         };
         timer.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }
