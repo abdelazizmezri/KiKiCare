@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/ic_launcher"
+        android:layout_alignParentStart="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@id/image"
+        android:layout_toRightOf="@id/image"
+        android:layout_toLeftOf="@id/btn_delete"
+        android:layout_toEndOf="@id/image"
+        android:layout_toStartOf="@id/btn_delete"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
+            android:text="Name" />
+
+        <TextView
+            android:id="@+id/sexe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
+            android:text="Sexe" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/ic_delete_black_24dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_below="@id/image"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"/>
+
+</RelativeLayout>
