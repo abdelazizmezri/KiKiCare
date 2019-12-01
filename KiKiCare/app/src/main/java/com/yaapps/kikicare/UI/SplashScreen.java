@@ -1,16 +1,17 @@
-package com.yaapps.kikicare;
+package com.yaapps.kikicare.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.RelativeLayout;
+
+import com.yaapps.kikicare.R;
 
 public class SplashScreen extends AppCompatActivity {
 
-    RelativeLayout splash;
+    ConstraintLayout splash;
 
     Handler handler = new Handler();
     Runnable show = new Runnable() {
@@ -32,7 +33,7 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        splash = (RelativeLayout) findViewById(R.id.splash);
+        splash = findViewById(R.id.splash);
         handler.postDelayed(show, 1000);
         handler.postDelayed(hide, 3000);
 
@@ -43,7 +44,7 @@ public class SplashScreen extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                     startActivity(intent);
                 }
             }
