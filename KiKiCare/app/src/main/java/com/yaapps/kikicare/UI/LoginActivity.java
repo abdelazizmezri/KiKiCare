@@ -1,28 +1,21 @@
-package com.yaapps.kikicare;
+package com.yaapps.kikicare.UI;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -30,18 +23,19 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.yaapps.kikicare.ControleSaisie;
 import com.yaapps.kikicare.Entity.User;
-import com.yaapps.kikicare.UI.HomeActivity;
+import com.yaapps.kikicare.InternetDialog;
+import com.yaapps.kikicare.PrefManager;
+import com.yaapps.kikicare.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -87,6 +81,10 @@ public class LoginActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         prefManager = new PrefManager(this);
+        if (prefManager.getUser()!=null) {
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
+        }
 
         textInputEmail = findViewById(R.id.textInputEmail);
         textInputPassword = findViewById(R.id.textInputPassword);
@@ -275,9 +273,7 @@ public class LoginActivity extends AppCompatActivity {
             imageurl = Objects.requireNonNull(account.getPhotoUrl()).toString();
             queue = Volley.newRequestQueue(LoginActivity.this);
             final String url = "http://10.0.2.2:1225/getUser?email=" + txtemail.toLowerCase();
-            final Response.ErrorListener connection_error = error -> {
-                Toast.makeText(LoginActivity.this, "Server error", Toast.LENGTH_LONG).show();
-            };
+            final Response.ErrorListener connection_error = error -> Toast.makeText(LoginActivity.this, "Server error", Toast.LENGTH_LONG).show();
             StringRequest postRequest = new StringRequest(Request.Method.GET, url, response -> {
                 // response
                 if (response.isEmpty()) {
@@ -326,7 +322,6 @@ public class LoginActivity extends AppCompatActivity {
                 txtlastname = "";
                 txtemail = "";
                 imageurl = "";
-                Toast.makeText(LoginActivity.this,"User Logged out",Toast.LENGTH_LONG).show();
             } else{
                 loadUserProfile(currentAccessToken);
             }
@@ -352,6 +347,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 queue = Volley.newRequestQueue(LoginActivity.this);
                 final String url = "http://10.0.2.2:1225/getUser?email=" + txtemail.toLowerCase();
+                final Response.ErrorListener connection_error = error -> {
+                    // error
+                    Toast.makeText(LoginActivity.this, "Connection error", Toast.LENGTH_LONG).show();
+                };
                 StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                         response1 -> {
                             // response
@@ -367,10 +366,7 @@ public class LoginActivity extends AppCompatActivity {
                                             prefManager.setUser(new User(txtemail,txtname,txtlastname,"",imageurl,"FACEBOOK"));
                                             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                         },
-                                        error -> {
-                                            // error
-                                            Toast.makeText(LoginActivity.this, "Connection error", Toast.LENGTH_LONG).show();
-                                        }
+                                        connection_error
                                 );
                                 queue.add(postRequest1);
                             }else{
@@ -385,19 +381,12 @@ public class LoginActivity extends AppCompatActivity {
                                             prefManager.setUser(new User(txtemail,txtname,txtlastname,"",imageurl,"FACEBOOK"));
                                             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                         },
-                                        error -> {
-                                            // error
-                                            Toast.makeText(LoginActivity.this, "Connection error", Toast.LENGTH_LONG).show();
-                                        }
+                                        connection_error
                                 );
                                 queue.add(postRequest1);
-                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                             }
                         },
-                        error -> {
-                            // error
-                            Toast.makeText(LoginActivity.this, "Connection error", Toast.LENGTH_LONG).show();
-                        }
+                        connection_error
                 );
                 queue.add(postRequest);
 
@@ -414,15 +403,8 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void checkLoginStatus() {
-        if(AccessToken.getCurrentAccessToken()!=null)
-        {
-            loadUserProfile(AccessToken.getCurrentAccessToken());
-        }
-    }
-
     public void onLoginClick(View View){
-        startActivity(new Intent(this,RegisterActivity.class));
+        startActivity(new Intent(this, RegisterActivity.class));
         overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
         finish();
     }

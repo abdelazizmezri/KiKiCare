@@ -22,10 +22,8 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.yaapps.kikicare.InternetDialog;
-import com.yaapps.kikicare.LoginActivity;
 import com.yaapps.kikicare.PrefManager;
 import com.yaapps.kikicare.R;
-import com.yaapps.kikicare.RegisterActivity;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -46,7 +44,7 @@ public class StartActivity extends AppCompatActivity {
         // Checking for first time launch - before calling setContentView()
         prefManager = new PrefManager(this);
         if (prefManager.getUser()!=null) {
-            launchHomeScreen();
+            startLoginActivity();
             finish();
         }
 
@@ -82,7 +80,7 @@ public class StartActivity extends AppCompatActivity {
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
-        btnSkip.setOnClickListener(v -> launchHomeScreen());
+        btnSkip.setOnClickListener(v -> startLoginActivity());
 
         loginBtn.setOnClickListener(view -> startLoginActivity());
 
@@ -133,12 +131,6 @@ public class StartActivity extends AppCompatActivity {
         }
     }
 
-    private void launchHomeScreen() {
-        prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(this, HomeActivity.class));
-        finish();
-    }
-
     //  viewpager change listener
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
@@ -151,7 +143,7 @@ public class StartActivity extends AppCompatActivity {
                 // last page. make button text to GOT IT
 //                btnNext.setText(getString(R.string.start));
                 btnSkip.setText(R.string.skip_intro);
-                launchHomeScreen();
+                startLoginActivity();
 //                btnSkip.setVisibility(View.GONE);
             } else {
                 // still pages are left

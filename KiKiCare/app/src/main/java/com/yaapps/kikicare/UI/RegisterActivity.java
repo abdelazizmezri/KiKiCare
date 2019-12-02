@@ -1,35 +1,24 @@
-package com.yaapps.kikicare;
+package com.yaapps.kikicare.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Debug;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
+import com.yaapps.kikicare.ControleSaisie;
 import com.yaapps.kikicare.Entity.User;
+import com.yaapps.kikicare.InternetDialog;
+import com.yaapps.kikicare.R;
 
 import java.util.Objects;
-
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
-
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -50,14 +39,11 @@ public class RegisterActivity extends AppCompatActivity {
         textInputVerifPassword = findViewById(R.id.textInputVerifPassword);
 
         //textInputFirstNameControle
-        textInputFirstName.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus) {
-                    if (textInputFirstName.getEditText().getText().toString().isEmpty()) {
-                        textInputFirstName.setError("First Name is empty");
-                        textInputFirstNameControle = false;
-                    }
+        Objects.requireNonNull(textInputFirstName.getEditText()).setOnFocusChangeListener((v, hasFocus) -> {
+            if(!hasFocus) {
+                if (textInputFirstName.getEditText().getText().toString().isEmpty()) {
+                    textInputFirstName.setError("First Name is empty");
+                    textInputFirstNameControle = false;
                 }
             }
         });
@@ -91,14 +77,11 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         //textInputLasNameControle
-        textInputLasName.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus) {
-                    if (textInputLasName.getEditText().getText().toString().isEmpty()) {
-                        textInputLasName.setError("Last Name is empty");
-                        textInputLasNameControle = false;
-                    }
+        Objects.requireNonNull(textInputLasName.getEditText()).setOnFocusChangeListener((v, hasFocus) -> {
+            if(!hasFocus) {
+                if (textInputLasName.getEditText().getText().toString().isEmpty()) {
+                    textInputLasName.setError("Last Name is empty");
+                    textInputLasNameControle = false;
                 }
             }
         });
@@ -132,37 +115,31 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         //textInputEmailControle
-        textInputEmail.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus) {
-                    if (!textInputEmail.getEditText().getText().toString().isEmpty()) {
+        Objects.requireNonNull(textInputEmail.getEditText()).setOnFocusChangeListener((v, hasFocus) -> {
+            if(!hasFocus) {
+                if (!textInputEmail.getEditText().getText().toString().isEmpty()) {
+                    textInputEmail.setErrorEnabled(false);
+                    if (ControleSaisie.validEmail(textInputEmail.getEditText().getText().toString())) {
                         textInputEmail.setErrorEnabled(false);
-                        if (ControleSaisie.validEmail(textInputEmail.getEditText().getText().toString())) {
-                            textInputEmail.setErrorEnabled(false);
-                            textInputEmailControle = true;
-                        } else {
-                            textInputEmail.setError("Email is invalid");
-                            textInputEmailControle = false;
-                        }
+                        textInputEmailControle = true;
                     } else {
-                        textInputEmail.setError("Email is empty");
+                        textInputEmail.setError("Email is invalid");
                         textInputEmailControle = false;
                     }
+                } else {
+                    textInputEmail.setError("Email is empty");
+                    textInputEmailControle = false;
                 }
             }
         });
 
         //textInputPasswordControle
-        textInputPassword.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus) {
-                    if (textInputPassword.getEditText().getText().toString().isEmpty()) {
-                        textInputPassword.setError("Password is empty");
-                        textInputVerifPassword.getEditText().setEnabled(false);
-                        textInputPasswordControle = false;
-                    }
+        Objects.requireNonNull(textInputPassword.getEditText()).setOnFocusChangeListener((v, hasFocus) -> {
+            if(!hasFocus) {
+                if (textInputPassword.getEditText().getText().toString().isEmpty()) {
+                    textInputPassword.setError("Password is empty");
+                    Objects.requireNonNull(textInputVerifPassword.getEditText()).setEnabled(false);
+                    textInputPasswordControle = false;
                 }
             }
         });
@@ -198,19 +175,16 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         //textInputVerifPasswordControle
-        textInputVerifPassword.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus) {
-                    String password = textInputPassword.getEditText().getText().toString();
-                    String verifPassword = textInputVerifPassword.getEditText().getText().toString();
-                    if (password.equals(verifPassword)) {
-                        textInputVerifPassword.setErrorEnabled(false);
-                        textInputVerifPasswordControle = true;
-                    } else {
-                        textInputVerifPassword.setError("Password is invalid");
-                        textInputVerifPasswordControle = false;
-                    }
+        Objects.requireNonNull(textInputVerifPassword.getEditText()).setOnFocusChangeListener((v, hasFocus) -> {
+            if(!hasFocus) {
+                String password = textInputPassword.getEditText().getText().toString();
+                String verifPassword = textInputVerifPassword.getEditText().getText().toString();
+                if (password.equals(verifPassword)) {
+                    textInputVerifPassword.setErrorEnabled(false);
+                    textInputVerifPasswordControle = true;
+                } else {
+                    textInputVerifPassword.setError("Password is invalid");
+                    textInputVerifPasswordControle = false;
                 }
             }
         });
@@ -273,64 +247,48 @@ public class RegisterActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(RegisterActivity.this);
         final String url = "http://10.0.2.2:1225/getUser?email=" + user.getEmail();
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>()
-                {
-                    @Override
-                    public void onResponse(String response) {
-                        // response
-                        if(response.isEmpty()){
-                            String url = "http://10.0.2.2:1225/AddUser?first_name=" + user.getFirstName().toLowerCase()
-                                    + "&last_name=" + user.getLastName()
-                                    + "&email=" + user.getEmail()
-                                    + "&password=" + user.getPassword()
-                                    + "&url_image=" + user.getUrlImage()
-                                    + "&mode=" + user.getMode();
-                            StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                                    new Response.Listener<String>()
-                                    {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            // response
-                                            cirRegisterButton.revertAnimation();
-                                            Toast.makeText(RegisterActivity.this, user.getEmail() + " est ajouté avec succés", Toast.LENGTH_LONG).show();
-                                            onLoginClick(v);
-                                        }
-                                    },
-                                    new Response.ErrorListener()
-                                    {
-                                        @Override
-                                        public void onErrorResponse(VolleyError error) {
-                                            // error
-                                            cirRegisterButton.revertAnimation();
-                                            cirRegisterButton.setError("");
-                                            Toast.makeText(RegisterActivity.this, "Problème de connexion", Toast.LENGTH_LONG).show();
-                                        }
-                                    }
-                            );
-                            queue.add(postRequest);
-                        }else{
-                            cirRegisterButton.revertAnimation();
-                            cirRegisterButton.setError("");
-                            Toast.makeText(RegisterActivity.this, "User existes", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // error
+                response -> {
+                    // response
+                    if(response.isEmpty()){
+                        String url1 = "http://10.0.2.2:1225/AddUser?first_name=" + user.getFirstName().toLowerCase()
+                                + "&last_name=" + user.getLastName()
+                                + "&email=" + user.getEmail()
+                                + "&password=" + user.getPassword()
+                                + "&url_image=" + user.getUrlImage()
+                                + "&mode=" + user.getMode();
+                        StringRequest postRequest1 = new StringRequest(Request.Method.POST, url1,
+                                response1 -> {
+                                    // response
+                                    cirRegisterButton.revertAnimation();
+                                    Toast.makeText(RegisterActivity.this, user.getEmail() + " est ajouté avec succés", Toast.LENGTH_LONG).show();
+                                    onLoginClick(v);
+                                },
+                                error -> {
+                                    // error
+                                    cirRegisterButton.revertAnimation();
+                                    cirRegisterButton.setError("");
+                                    Toast.makeText(RegisterActivity.this, "Problème de connexion", Toast.LENGTH_LONG).show();
+                                }
+                        );
+                        queue.add(postRequest1);
+                    }else{
                         cirRegisterButton.revertAnimation();
                         cirRegisterButton.setError("");
-                        Toast.makeText(RegisterActivity.this, "Problème de connexion", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this, "User existes", Toast.LENGTH_LONG).show();
                     }
+                },
+                error -> {
+                    // error
+                    cirRegisterButton.revertAnimation();
+                    cirRegisterButton.setError("");
+                    Toast.makeText(RegisterActivity.this, "Problème de connexion", Toast.LENGTH_LONG).show();
                 }
         );
         queue.add(postRequest);
     }
 
     public void onLoginClick(View view){
-        startActivity(new Intent(this,LoginActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
         overridePendingTransition(R.anim.slide_in_left,android.R.anim.slide_out_right);
         finish();
     }

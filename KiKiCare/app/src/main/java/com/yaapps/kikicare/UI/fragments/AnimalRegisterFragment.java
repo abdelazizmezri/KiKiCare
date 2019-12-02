@@ -84,7 +84,7 @@ public class AnimalRegisterFragment extends Fragment {
                     int iduser=13; //getConnectedUser();
 
                     //Register
-                    Animal animal = new Animal(name,typeText,race,"25/05/2018",sizeText,sexeText,"image",iduser);
+                    Animal animal = new Animal(name,typeText,race,"02/12/2019",sizeText,sexeText,"image",iduser);
                     register(animal, save, v);
                 } else {
                     save.revertAnimation();
