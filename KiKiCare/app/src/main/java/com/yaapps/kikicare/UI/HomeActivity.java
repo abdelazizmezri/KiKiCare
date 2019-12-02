@@ -10,6 +10,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.facebook.AccessToken;
+import com.facebook.FacebookActivity;
+import com.facebook.login.LoginManager;
 import com.google.android.material.resources.MaterialResources;
 import com.google.android.material.shape.MaterialShapeDrawable;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -25,6 +28,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.materialize.color.Material;
 import com.yaapps.kikicare.LoginActivity;
+import com.yaapps.kikicare.PrefManager;
 import com.yaapps.kikicare.R;
 import com.yaapps.kikicare.UI.fragments.DashboardFragment;
 import com.yaapps.kikicare.UI.fragments.FragmentWelcome;
@@ -112,20 +116,17 @@ public class HomeActivity extends AppCompatActivity {
                 .withFireOnInitialOnClick(true)
                 .withSavedInstance(savedInstanceState)
                 .build();
-        result.addStickyFooterItem( new PrimaryDrawerItem().withName("Logout").withIcon(MaterialDrawerFont.Icon.mdf_arrow_drop_down) .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener(){
-            @Override
-            public  boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-
-                Intent ii=new Intent(HomeActivity.this, LoginActivity.class);
-
-                startActivity(ii);
-
-                return false;}        }
-
-
-
-        ));
+        result.addStickyFooterItem( new PrimaryDrawerItem().withName("Logout").withIcon(MaterialDrawerFont.Icon.mdf_arrow_drop_down) .withOnDrawerItemClickListener((view, position, drawerItem) -> {
+            String mode = new PrefManager(HomeActivity.this).getUser().getMode();
+            if(mode.equals("GMAIL"))
+                LoginActivity.mGoogleSignInClient.signOut();
+            else if(mode.equals("FACEBOOK")){
+                LoginManager.getInstance().logOut();
+            }
+            new PrefManager(HomeActivity.this).setUser(null);
+            Intent ii=new Intent(HomeActivity.this, LoginActivity.class);
+            startActivity(ii);
+            return false;
+        }));
     }
-
-
 }

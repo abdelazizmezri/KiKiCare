@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.yaapps.kikicare.InternetDialog;
 import com.yaapps.kikicare.LoginActivity;
 import com.yaapps.kikicare.PrefManager;
 import com.yaapps.kikicare.R;
@@ -119,13 +120,17 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void startLoginActivity() {
-        prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(this, LoginActivity.class));
+        if(new InternetDialog(this).getInternetStatus()){
+            prefManager.setFirstTimeLaunch(false);
+            startActivity(new Intent(this, LoginActivity.class));
+        }
     }
 
     private void startRegisterActivity() {
-        prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(this, RegisterActivity.class));
+        if(new InternetDialog(this).getInternetStatus()) {
+            prefManager.setFirstTimeLaunch(false);
+            startActivity(new Intent(this, RegisterActivity.class));
+        }
     }
 
     private void launchHomeScreen() {

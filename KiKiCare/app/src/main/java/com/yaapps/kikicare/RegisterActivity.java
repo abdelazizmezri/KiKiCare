@@ -24,6 +24,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
+import com.yaapps.kikicare.Entity.User;
+
+import java.util.Objects;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 
@@ -174,16 +177,16 @@ public class RegisterActivity extends AppCompatActivity {
                 if (!textInputPassword.getEditText().getText().toString().isEmpty()) {
                     textInputPassword.setErrorEnabled(false);
                     if (textInputPassword.getEditText().getText().toString().length() > 7) {
-                        textInputVerifPassword.getEditText().setEnabled(true);
+                        Objects.requireNonNull(textInputVerifPassword.getEditText()).setEnabled(true);
                         textInputPasswordControle = true;
                     } else {
                         textInputPassword.setError("Password length must be more than 8");
-                        textInputVerifPassword.getEditText().setEnabled(false);
+                        Objects.requireNonNull(textInputVerifPassword.getEditText()).setEnabled(false);
                         textInputPasswordControle = false;
                     }
                 } else {
                     textInputPassword.setError("Password is empty");
-                    textInputVerifPassword.getEditText().setEnabled(false);
+                    Objects.requireNonNull(textInputVerifPassword.getEditText()).setEnabled(false);
                     textInputPasswordControle = false;
                 }
             }
@@ -241,7 +244,7 @@ public class RegisterActivity extends AppCompatActivity {
         cirRegisterButton = findViewById(R.id.cirRegisterButton);
         cirRegisterButton.setOnClickListener(v -> {
             cirRegisterButton.startAnimation();
-            if(isConnected()) {
+            if(new InternetDialog(this).getInternetStatus()) {
                 if (textInputFirstNameControle && textInputLasNameControle && textInputEmailControle && textInputPasswordControle && textInputVerifPasswordControle) {
                     cirRegisterButton.setError(null);
                     String email = textInputEmail.getEditText().getText().toString();
@@ -266,11 +269,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    public void onLoginClick(View view){
-        startActivity(new Intent(this,LoginActivity.class));
-        overridePendingTransition(R.anim.slide_in_left,android.R.anim.slide_out_right);
-    }
-
     private void register(User user, CircularProgressButton cirRegisterButton, View v){
         queue = Volley.newRequestQueue(RegisterActivity.this);
         final String url = "http://10.0.2.2:1225/getUser?email=" + user.getEmail();
@@ -281,7 +279,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         // response
                         if(response.isEmpty()){
-                            String url = "http://10.0.2.2:1225/AddUser?first_name=" + user.getFirstName()
+                            String url = "http://10.0.2.2:1225/AddUser?first_name=" + user.getFirstName().toLowerCase()
                                     + "&last_name=" + user.getLastName()
                                     + "&email=" + user.getEmail()
                                     + "&password=" + user.getPassword()
@@ -331,10 +329,9 @@ public class RegisterActivity extends AppCompatActivity {
         queue.add(postRequest);
     }
 
-    private boolean isConnected() {
-        ConnectivityManager cm = (ConnectivityManager) RegisterActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        assert cm != null;
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    public void onLoginClick(View view){
+        startActivity(new Intent(this,LoginActivity.class));
+        overridePendingTransition(R.anim.slide_in_left,android.R.anim.slide_out_right);
+        finish();
     }
 }

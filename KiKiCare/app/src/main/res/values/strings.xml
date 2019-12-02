@@ -4,7 +4,7 @@
     <string name="login_password_hint">Password</string>
     <string name="facebook_app_id">775458946230477</string>
     <string name="fb_login_protocol_scheme">fb775458946230477</string>
-//
+    //
     <string name="animal_name_hint"> Animal Name</string>
     <string name="animal_type_hint">what is your animal?(Cat,Dog ..)</string>
     <string name="animal_race_hint">what is your animal race ?</string>
@@ -25,10 +25,26 @@
         <item>Other</item>
     </string-array>
 
-    <string-array name="language">
-        <item>English</item>
-        <item>French</item>
-        <item>Arabic</item>
-    </string-array>
+    <!--onboarding designs-->
+    <string name="onboarding_welcome_1Content">You can simply manage all your pets through our app,and navigating between profiles , you can also add pictures of your animals and share it with the rest of the community. </string>
+    <string name="onboarding_welcome_2Content">For users who want to adopt a pet or even put an animal to adoption , KIKICARE is the place for them , a community that is full of pet lovers will make the job a lot easier. </string>
+    <string name="onboarding_welcome_3Content">Our main purpose is to keep your pet in a healthy state , an entire set is provided through our app, from reminders , vaccinations to doctor appointments .Easy to use easy to care. </string>
+    <string name="onboarding_welcome_3">Healthy Animals</string>
+    <string name="onboarding_welcome_2">Adoption Ads</string>
+    <string name="onboarding_welcome_1">Animals management</string>
+    <string name="login">Login</string>
+    <string name="new_user_register_now">New user? Register Now</string>
+    <string name="use_other_methods">Use other Methods</string>
+    <string name="register">Register</string>
+    <string name="skip_intro">Skip intro</string>
+    <string name="back_press">Please click BACK again to exit</string>
+    <string name="welcome_to_kikicare">Welcome to KiKiCare !</string>
+    <string name="lastname">LastName</string>
+    <string name="firstname">FirstName</string>
+    <string name="reenter_your_password">Reenter your password</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="no_internet">No Internet</string>
+    <string name="close">Close</string>
+    <string name="no_internet_content">Please check your connection status and try again</string>
 
 </resources>

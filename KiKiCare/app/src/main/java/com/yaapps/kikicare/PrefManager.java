@@ -32,13 +32,23 @@ public class PrefManager {
     }
 
     public void setUser(User user) {
-        editor.putInt("idUser", user.getId());
-        editor.putString("email", user.getEmail());
-        editor.putString("first_name", user.getFirstName());
-        editor.putString("last_name", user.getLastName());
-        editor.putString("password", user.getPassword());
-        editor.putString("url_image", user.getUrlImage());
-        editor.putString("mode", user.getMode());
+        if(user!=null){
+            editor.putInt("idUser", user.getId());
+            editor.putString("email", user.getEmail());
+            editor.putString("first_name", user.getFirstName());
+            editor.putString("last_name", user.getLastName());
+            editor.putString("password", user.getPassword());
+            editor.putString("url_image", user.getUrlImage());
+            editor.putString("mode", user.getMode());
+        }else{
+            editor.putInt("idUser", 0);
+            editor.putString("email", "");
+            editor.putString("first_name", "");
+            editor.putString("last_name", "");
+            editor.putString("password", "");
+            editor.putString("url_image", "");
+            editor.putString("mode", "");
+        }
         editor.commit();
     }
 
