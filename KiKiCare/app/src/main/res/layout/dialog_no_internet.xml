@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/df_dialog_layout"
     android:id="@+id/dialogParent">
 
@@ -22,13 +23,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/no_internet_image"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 style="@style/homeHeading"
                 android:textColor="@color/blackTextColor"
                 android:textSize="@dimen/headerTextSize"
-                android:text="No Internet"
+                android:text="@string/no_internet"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"/>
 
@@ -39,15 +41,15 @@
                 android:layout_gravity="center"
                 style="@style/learnhubTitleText"
                 android:textStyle="normal"
-                android:textSize="14dp"
-                android:text="Please check your connection status and try again"/>
+                android:textSize="14sp"
+                android:text="@string/no_internet_content"/>
 
             <Button
                 android:id="@+id/btnSpinAndWinRedeem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Close"
+                android:text="@string/close"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/whiteTextColor"
                 android:background="@drawable/onboarding_button"/>
