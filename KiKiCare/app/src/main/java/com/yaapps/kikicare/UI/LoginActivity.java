@@ -34,6 +34,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.yaapps.kikicare.ControleSaisie;
 import com.yaapps.kikicare.Entity.User;
 import com.yaapps.kikicare.InternetDialog;
+import com.yaapps.kikicare.MainActivity;
 import com.yaapps.kikicare.PrefManager;
 import com.yaapps.kikicare.R;
 
@@ -82,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
 
         prefManager = new PrefManager(this);
         if (prefManager.getUser()!=null) {
-            startActivity(new Intent(this, HomeActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         }
 
@@ -173,7 +174,7 @@ public class LoginActivity extends AppCompatActivity {
                                         if (user.getPassword().contentEquals(textInputPassword.getEditText().getText())) {
                                             bt_login.revertAnimation();
                                             prefManager.setUser(user);
-                                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                         } else {
                                             bt_login.revertAnimation();
                                             bt_login.setError("");
@@ -285,7 +286,7 @@ public class LoginActivity extends AppCompatActivity {
                     StringRequest postRequest1 = new StringRequest(Request.Method.POST, url1,
                             response1 -> {
                                 prefManager.setUser(new User(txtemail,txtname,txtlastname,"",imageurl,"GMAIL"));
-                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             },
                             connection_error
                     );
@@ -299,7 +300,7 @@ public class LoginActivity extends AppCompatActivity {
                     StringRequest postRequest1 = new StringRequest(Request.Method.POST, url1,
                             response12 -> {
                                 prefManager.setUser(new User(txtemail,txtname,txtlastname,"",imageurl,"GMAIL"));
-                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             },
                             connection_error
                     );
@@ -364,7 +365,7 @@ public class LoginActivity extends AppCompatActivity {
                                         response11 -> {
                                             // response
                                             prefManager.setUser(new User(txtemail,txtname,txtlastname,"",imageurl,"FACEBOOK"));
-                                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                         },
                                         connection_error
                                 );
@@ -379,7 +380,7 @@ public class LoginActivity extends AppCompatActivity {
                                         response112 -> {
                                             // response
                                             prefManager.setUser(new User(txtemail,txtname,txtlastname,"",imageurl,"FACEBOOK"));
-                                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                         },
                                         connection_error
                                 );

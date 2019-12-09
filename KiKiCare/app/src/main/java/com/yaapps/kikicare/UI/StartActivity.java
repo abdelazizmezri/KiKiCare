@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.yaapps.kikicare.InternetDialog;
 import com.yaapps.kikicare.PrefManager;
 import com.yaapps.kikicare.R;
@@ -220,7 +221,7 @@ public class StartActivity extends AppCompatActivity {
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, R.string.back_press, Toast.LENGTH_SHORT).show();
+        Snackbar.make(this.viewPager, R.string.back_press, Snackbar.LENGTH_SHORT).show();
 
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce=false, 2000);
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#5ce1e6</color>
-    <color name="colorPrimaryDark">#38b6ff</color>
+    <color name="colorPrimary">#5CE1E6</color>
+    <color name="colorPrimaryDark">#38B6FF</color>
     <color name="colorAccent">#737373</color>
     <color name="gradStart">#5ce1e6</color>
     <color name="gradEnd">#7ed957</color>
@@ -54,5 +54,11 @@
     <color name="df_transparent_black_background">#80000000</color>
     <color name="whiteCardColor">#fff</color>
     <color name="blackTextColor">#000</color>
+
+    <!--colors for profile-->
+    <color name="profilePrimaryDark">#FF3B30</color>
+    <color name="profileAccentColor">#F7F7F7</color>
+    <color name="profileBackground">#fff</color>
+    <color name="profileEditTextColor">#707070</color>
 
 </resources>
